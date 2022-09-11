@@ -14,12 +14,33 @@ the function below should be the only one in this file.
 
 /* Add a prototype for a helper function here if you need */
 
-void split(Node*& in, Node*& odds, Node*& evens)
+void split(Node*& in, Node*& odds, Node*& evens){
+	split_helper(in, odds, evens);
+	in = nullptr;
+}
+
+
+void split_helper(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
 // WRITE YOUR CODE HERE
 
+if(in == nullptr){
+	evens = nullptr;
+	odds = nullptr;
+	return;
 }
+else if (in->value%2 == 0){
+	evens = in;
+	return split_helper(in->next, odds, evens->next);
+}
+
+else if (in->value % 2 != 0){
+	odds = in;
+	return split_helper(in->next, odds->next, evens);
+}
+}
+
 
 /* If you needed a helper function, write it here */
 
